@@ -1,0 +1,56 @@
+\usepackage{etex} % Allows more ``variables'' saved.
+\usepackage{mathtools,amssymb} % Standard AMS packages
+\usepackage{physics} % For paired delimiters that I like (\bqty{} type stuff)
+\usepackage{empheq} % Allows modifications to most environments (like align).
+\usepackage{enumitem} % For \begin{enumerate}[resume] and [start = 3]
+\usepackage{mdframed} % For nice question environment
+\usepackage{tikz} % Same as above
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{centernot}%%gives \centernot, better than \not
+\usepackage{hyperref}
+
+\allowdisplaybreaks % Breaks align environments across pages
+
+%% Shorthand Stuff
+\newcommand{\TODO}[1]{[[\ensuremath{\bigstar\bigstar\bigstar} #1]]} %Sign to revisit after lecture
+\renewcommand{\labelitemi}{--}  % changes the default bullet in itemize
+\newcommand{\Def}[1]{\textbf{#1}\index{#1}} % Bolds something and adds to the index
+\newcommand{\lec}[1]{\begin{center}\textbf{LECTURE - #1}\end{center}}
+\newcommand{\URL}[1]{\href{#1}{\url{#1}}}	%% Displays and links to url
+
+%%%%%%%%%%% Box around Questions on Problem Sets %%%%%%%%%%%%%%%%%%%%%
+
+\newcounter{Problem}
+\newcounter{SubProblem}[Problem]
+
+\global\mdfdefinestyle{problem}{%
+	linecolor=lightgray,linewidth=1pt,%
+	leftmargin=0cm,rightmargin=0cm,
+}
+\global\mdfdefinestyle{subproblem}{%
+	linecolor=lightgray,linewidth=1pt,%
+	leftmargin=.3cm,rightmargin=0cm,
+}
+
+
+\newenvironment{problem}[1][]{\refstepcounter{Problem}\par%
+	\mdfsetup{%
+		frametitle={\tikz\node[fill=white,rectangle,inner sep=0pt,outer sep=0pt]{Problem \arabic{Problem}};},
+		frametitleaboveskip=-0.5\ht\strutbox,
+		frametitlealignment=\raggedright
+	}%
+	\begin{mdframed}[style=problem]
+		}{\end{mdframed}}
+
+	\newenvironment{subproblem}[1][]{\refstepcounter{SubProblem}\par%
+		\mdfsetup{%
+			frametitle={\tikz\node[fill=white,rectangle,inner sep=0pt,outer sep=0pt]{Part \alph{SubProblem}};},
+			frametitleaboveskip=-0.5\ht\strutbox,
+			frametitlealignment=\raggedright,leftmargin=.5cm
+		}%
+		\begin{mdframed}[style=subproblem]}{\end{mdframed}}
+
+	\endinput
